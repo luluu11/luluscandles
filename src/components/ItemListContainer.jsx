@@ -1,11 +1,31 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import ItemCount from "./ItemCount";
+import ItemList from "./ItemList";
+import arrayProductos from ".json/arrayProductos.json";
 
-const Espacio = () => {
+const ItemListContainer = ({greeting}) => {
+    const [items, setItems] = useState ([]);
+}
+    useEffect (() => {
+
+        const promesa = new Promise ((resolve) => {
+            setTimeout (() => {
+                resolve(arrayProductos);
+        })
+        });
+
+promesa.then((data) => {
+    console.log(data);
+    setItems(data);
+    })
+}, []);
+    
     return (
-        <div className="row">
-           <img className="col-md-4 d-flex justify-content-center" src={"images/velageo.jpg"} alt={"velageo"}/>
-        </div>        
+        <div className="container py-5">
+            <ItemList items={items}/>
+            <ItemCount stockItems={10}/>
+            </div>
     );
-};
 
-export default Espacio; 
+export default ItemList; 
